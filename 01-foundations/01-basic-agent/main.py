@@ -4,18 +4,38 @@ Build your first LangChain agent
 """
 
 import os
+import sys
 
-from dotenv import load_dotenv
+# Add workspace root to path so we can import config
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+
 from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
 from langchain.tools import tool
 
-# Load environment variables
-load_dotenv()
+# Import centralized configuration
+from config import MODEL_CONFIG, MODEL_NAME, MODEL_PROVIDER
 
 # ============================================================================
 # STEP 1: Define Tools
 # ============================================================================
+
+
+def _to_text(content: object) -> str:
+    """Normalize model content to plain text for console output."""
+    if isinstance(content, str):
+        return content
+
+    if isinstance(content, list):
+        parts: list[str] = []
+        for item in content:
+            if isinstance(item, dict) and item.get("type") == "text":
+                parts.append(str(item.get("text", "")))
+            else:
+                parts.append(str(item))
+        return " ".join(part for part in parts if part).strip()
+
+    return str(content)
 
 @tool
 def get_weather(city: str) -> str:
@@ -47,12 +67,10 @@ def get_weather(city: str) -> str:
 # ============================================================================
 
 model = init_chat_model(
-    "claude-sonnet-4-6",  # Using Anthropic's Claude
-    temperature=0.7,      # Slightly creative responses
-    max_tokens=500        # Limit response length
+    MODEL_NAME,
+    model_provider=MODEL_PROVIDER,
+    **MODEL_CONFIG
 )
-
-print("✓ Model initialized:", model)
 
 
 # ============================================================================
@@ -96,6 +114,11 @@ if __name__ == "__main__":
             {"messages": [{"role": "user", "content": query}]}
         )
         
-        # Print the response
-        print(f"Agent: {response['output']}")
+        # Print only the final assistant text, not the full response payload
+        final_messages = response.get("messages", [])
+        final_text = ""
+        if final_messages:
+            final_text = _to_text(final_messages[-1].content)
+
+        print(f"Agent: {final_text}")
         print()

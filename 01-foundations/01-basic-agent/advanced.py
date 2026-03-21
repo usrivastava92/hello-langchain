@@ -4,13 +4,38 @@ Add streaming and better output formatting
 """
 
 import os
+import sys
 
-from dotenv import load_dotenv
+# Add workspace root to path so we can import config
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+
 from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
 from langchain.tools import tool
 
-load_dotenv()
+# Import centralized configuration
+from config import MODEL_CONFIG, MODEL_NAME, MODEL_PROVIDER
+
+# ============================================================================
+# STEP 1: Helper Functions
+# ============================================================================
+
+def _to_text(content: object) -> str:
+    """Normalize model content to plain text for console output."""
+    if isinstance(content, str):
+        return content
+
+    if isinstance(content, list):
+        parts: list[str] = []
+        for item in content:
+            if isinstance(item, dict) and item.get("type") == "text":
+                parts.append(str(item.get("text", "")))
+            else:
+                parts.append(str(item))
+        return " ".join(part for part in parts if part).strip()
+
+    return str(content)
+
 
 @tool
 def get_weather(city: str) -> str:
@@ -38,7 +63,11 @@ def get_forecast(city: str, days: int = 3) -> str:
 # Multiple tools now!
 tools = [get_weather, get_forecast]
 
-model = init_chat_model("claude-sonnet-4-6", temperature=0.7)
+model = init_chat_model(
+    MODEL_NAME,
+    model_provider=MODEL_PROVIDER,
+    **MODEL_CONFIG
+)
 
 agent = create_agent(
     model=model,
@@ -69,5 +98,9 @@ if __name__ == "__main__":
             {"messages": [{"role": "user", "content": query}]}
         )
         
-        print(f"🤖 Agent: {response['output']}")
+        # Extract the final assistant message from the response
+        final_messages = response.get("messages", [])
+        if final_messages:
+            final_text = _to_text(final_messages[-1].content)
+            print(f"🤖 Agent: {final_text}")
         print()

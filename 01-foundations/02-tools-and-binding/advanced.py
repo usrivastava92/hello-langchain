@@ -4,14 +4,18 @@ Inject runtime context into tools
 """
 
 import os
+import sys
 from dataclasses import dataclass
 
-from dotenv import load_dotenv
+# Add workspace root to path so we can import config
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+
 from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
 from langchain.tools import ToolRuntime, tool
 
-load_dotenv()
+# Import centralized configuration
+from config import MODEL_CONFIG, MODEL_NAME, MODEL_PROVIDER
 
 # ============================================================================
 # STEP 1: Define Runtime Context
@@ -99,7 +103,11 @@ def log_user_activity(
 # STEP 3: Create Agent with Context
 # ============================================================================
 
-model = init_chat_model("claude-sonnet-4-6", temperature=0.7)
+model = init_chat_model(
+    MODEL_NAME,
+    model_provider=MODEL_PROVIDER,
+    **MODEL_CONFIG
+)
 
 tools = [get_user_location, get_user_weather, log_user_activity]
 

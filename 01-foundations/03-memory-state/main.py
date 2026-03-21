@@ -4,15 +4,19 @@ Multi-turn conversations with persistent state
 """
 
 import os
+import sys
 
-from dotenv import load_dotenv
+# Add workspace root to path so we can import config
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+
 from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
 from langchain.messages import HumanMessage
 from langchain.tools import tool
 from langgraph.checkpoint.memory import InMemorySaver
 
-load_dotenv()
+# Import centralized configuration
+from config import MODEL_CONFIG, MODEL_NAME, MODEL_PROVIDER
 
 # ============================================================================
 # STEP 1: Define Tools
@@ -51,7 +55,11 @@ print("  (In production, use database-backed checkpointer)")
 # STEP 3: Create Agent with Memory
 # ============================================================================
 
-model = init_chat_model("claude-sonnet-4-6", temperature=0.7)
+model = init_chat_model(
+    MODEL_NAME,
+    model_provider=MODEL_PROVIDER,
+    **MODEL_CONFIG
+)
 
 tools = [get_weather, set_reminder]
 

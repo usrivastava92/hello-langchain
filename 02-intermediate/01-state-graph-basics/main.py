@@ -5,8 +5,11 @@ Foundation of LangGraph - building blocks for agentic workflows
 
 import operator
 import os
+import sys
 
-from dotenv import load_dotenv
+# Add workspace root to path so we can import config
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+
 from langchain.chat_models import init_chat_model
 from langchain.messages import (AnyMessage, HumanMessage, SystemMessage,
                                 ToolMessage)
@@ -14,7 +17,8 @@ from langchain.tools import tool
 from langgraph.graph import END, START, StateGraph
 from typing_extensions import Annotated, TypedDict
 
-load_dotenv()
+# Import centralized configuration
+from config import MODEL_CONFIG, MODEL_NAME, MODEL_PROVIDER
 
 # ============================================================================
 # STEP 1: Define State with Annotated Types
@@ -68,7 +72,11 @@ print(f"✓ Tools defined: {[t.name for t in tools]}")
 # STEP 3: Initialize Model
 # ============================================================================
 
-model = init_chat_model("claude-sonnet-4-6", temperature=0)
+model = init_chat_model(
+    MODEL_NAME,
+    model_provider=MODEL_PROVIDER,
+    temperature=0  # Deterministic for calculator
+)
 model_with_tools = model.bind_tools(tools)
 
 print("✓ Model initialized with tools")

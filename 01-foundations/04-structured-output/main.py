@@ -4,14 +4,18 @@ Generate validated, structured responses
 """
 
 import os
+import sys
 from dataclasses import dataclass
 
-from dotenv import load_dotenv
+# Add workspace root to path so we can import config
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+
 from langchain.agents import ToolStrategy, create_agent
 from langchain.chat_models import init_chat_model
 from langchain.tools import tool
 
-load_dotenv()
+# Import centralized configuration
+from config import MODEL_CONFIG, MODEL_NAME, MODEL_PROVIDER
 
 # ============================================================================
 # STEP 1: Define Response Schema with Dataclass
@@ -108,7 +112,11 @@ def get_detailed_weather(city: str) -> dict:
 # STEP 4: Create Agent with Structured Output
 # ============================================================================
 
-model = init_chat_model("claude-sonnet-4-6", temperature=0.5)
+model = init_chat_model(
+    MODEL_NAME,
+    model_provider=MODEL_PROVIDER,
+    temperature=0.5  # Lower temperature for consistency in structured output
+)
 
 tools = [get_detailed_weather]
 
