@@ -1,7 +1,8 @@
 # LangChain Expert Learning Repository
 
 [![CI](https://img.shields.io/github/actions/workflow/status/usrivastava92/hello-langchain/ci.yml?branch=main&label=CI&logo=github)](https://github.com/usrivastava92/hello-langchain/actions)
-[![License](https://img.shields.io/github/license/usrivastava92/hello-langchain)](LICENSE)[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/usrivastava92/hello-langchain/badge)](https://scorecard.dev/status/github.com/usrivastava92/hello-langchain)
+[![License](https://img.shields.io/github/license/usrivastava92/hello-langchain)](LICENSE)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/usrivastava92/hello-langchain/badge)](https://scorecard.dev/status/github.com/usrivastava92/hello-langchain)
 
 A comprehensive, hands-on learning guide to master LangChain and its ecosystem of frameworks.
 
