@@ -1,8 +1,13 @@
-# LangChain Expert Learning Repository 🚀
+# LangChain Expert Learning Repository
+
+[![CI](https://img.shields.io/github/actions/workflow/status/usrivastava92/hello-langchain/ci.yml?branch=main&label=CI&logo=github)](https://github.com/usrivastava92/hello-langchain/actions)
+[![License](https://img.shields.io/github/license/usrivastava92/hello-langchain)](LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/usrivastava92/hello-langchain)](https://github.com/usrivastava92/hello-langchain/commits/main)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/usrivastava92/hello-langchain/badge)](https://scorecard.dev/status/github.com/usrivastava92/hello-langchain)
 
 A comprehensive, hands-on learning guide to master LangChain and its ecosystem of frameworks.
 
-## 📚 Ecosystem Overview
+## Ecosystem Overview
 
 The LangChain platform consists of several interconnected frameworks:
 
@@ -12,7 +17,7 @@ The LangChain platform consists of several interconnected frameworks:
 3. **LangSmith** - Platform for debugging, evaluating, testing, and deploying AI agents in production
 4. **LangChain Community** - Community-contributed integrations and utilities
 
-## 🎯 Learning Path
+## Learning Path
 
 This repository is organized into progressive levels of mastery:
 
@@ -40,7 +45,7 @@ This repository is organized into progressive levels of mastery:
 - [ ] Production deployment
 - [ ] Teaching and mentoring
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 hello-langchain/
@@ -78,7 +83,7 @@ hello-langchain/
     └── resources.md
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Python 3.10+
@@ -102,7 +107,7 @@ cd 01-foundations/01-basic-agent
 python main.py
 ```
 
-## 📖 What You'll Learn
+## What You'll Learn
 
 ### LangChain Fundamentals
 - Building basic and real-world agents
@@ -128,7 +133,7 @@ python main.py
 - Error handling and recovery
 - Scaling considerations
 
-## 🎓 Your Path to Expertise
+## Your Path to Expertise
 
 ### Week 1-2: Build Your Foundation
 - Complete all Phase 1 experiments
@@ -152,7 +157,7 @@ python main.py
 - Mentor others
 - Become the expert
 
-## 🔧 Key Frameworks & Tools
+## Key Frameworks & Tools
 
 | Framework | Purpose | Key Concepts |
 |-----------|---------|--------------|
@@ -161,7 +166,7 @@ python main.py
 | **LangSmith** | Debugging & production deployment | Tracing, Evaluation, Monitoring |
 | **LangChain Community** | Integrations & extensions | Providers, Vector DBs, Tools |
 
-## 📝 Experiment Format
+## Experiment Format
 
 Each experiment follows this structure:
 
@@ -174,16 +179,16 @@ experiment-name/
 └── outputs/              # Example outputs
 ```
 
-## 🎯 Success Criteria
+## Success Criteria
 
-- ✅ Understand all LangChain components and their relationships
-- ✅ Build agents from scratch using LangGraph
-- ✅ Implement complex workflows with state management
-- ✅ Deploy and monitor with LangSmith
-- ✅ Teach LangChain concepts to others
-- ✅ Build production-ready applications
+- Understand all LangChain components and their relationships
+- Build agents from scratch using LangGraph
+- Implement complex workflows with state management
+- Deploy and monitor with LangSmith
+- Teach LangChain concepts to others
+- Build production-ready applications
 
-## 📚 Official Resources
+## Official Resources
 
 - [LangChain Documentation](https://docs.langchain.com/)
 - [LangChain Academy](https://academy.langchain.com/)
@@ -191,7 +196,7 @@ experiment-name/
 - [LangChain Forum](https://forum.langchain.com/)
 - [LangChain Blog](https://blog.langchain.com/)
 
-## 🤝 Contributing to Your Learning
+## Contributing to Your Learning
 
 As you complete each experiment:
 1. Document your findings
@@ -199,7 +204,7 @@ As you complete each experiment:
 3. Create variations and improvements
 4. Share your learnings
 
-## 📞 Support & Resources
+## Support & Resources
 
 - Stuck? Check the troubleshooting guide in `docs/`
 - Want to go deeper? See `ECOSYSTEM_GUIDE.md`
@@ -207,6 +212,6 @@ As you complete each experiment:
 
 ---
 
-**Status**: Starting your LangChain mastery journey! 🎓
+**Status**: Starting your LangChain mastery journey!
 
 Last Updated: March 20, 2026
